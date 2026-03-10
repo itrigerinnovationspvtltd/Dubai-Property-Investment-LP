@@ -327,6 +327,10 @@ p {
   gap: 6px;
 }
 
+.form-card .field:last-of-type {
+  margin-bottom: 8px;
+}
+
 .field label {
   font-size: 0.85rem;
   color: #e5e7eb;
@@ -451,8 +455,9 @@ p {
   border: 1px solid rgba(148, 163, 184, 0.6);
   padding: 12px 16px;
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
   min-height: 96px;
 }
 
@@ -465,6 +470,19 @@ p {
   justify-content: center;
   background: rgba(59, 130, 246, 0.12);
   border: 1px solid rgba(59, 130, 246, 0.35);
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.stat-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .stat-value {

@@ -306,7 +306,7 @@ function LandingPage() {
             </div>
           </div>
 
-          <div className="hero-right">
+            <div className="hero-right">
             <div className="card form-card">
               <h2>Get Curated Dubai Property Options</h2>
               <form onSubmit={handleSubmit("Landing Page — Hero Form")}>
@@ -385,11 +385,15 @@ function LandingPage() {
               { label: "Property Tax", value: "0%", icon: "tax" },
             ].map((item) => (
               <div key={item.label} className="stat-card">
-                <div className="stat-icon">
-                  <Icon name={item.icon} />
+                <div className="stat-row">
+                  <div className="stat-icon">
+                    <Icon name={item.icon} />
+                  </div>
+                  <div className="stat-text">
+                    <p className="stat-value">{item.value}</p>
+                    <p className="stat-label">{item.label}</p>
+                  </div>
                 </div>
-                <p className="stat-value">{item.value}</p>
-                <p className="stat-label">{item.label}</p>
               </div>
             ))}
           </div>
@@ -599,101 +603,7 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="section subtle-bg">
-        <div className="container">
-          <h2>What Investors Say</h2>
-          <div className="grid cards-3">
-            {[
-              {
-                city: "Investor - Bangalore",
-                quote:
-                  "I wanted to diversify outside India. The team explained the payment structure clearly and helped me secure my first Dubai property.",
-              },
-              {
-                city: "Investor - Mumbai",
-                quote:
-                  "The process was transparent and professional. I appreciated the guidance on rental returns and developer reputation.",
-              },
-              {
-                city: "Investor - Delhi NCR",
-                quote:
-                  "As an overseas investor, I needed clarity. The team helped me understand the regulations and investment structure.",
-              },
-            ].map((item) => (
-              <div key={item.city} className="card testimonial-card">
-                <p className="testimonial-city">{item.city}</p>
-                <p className="testimonial-quote">“{item.quote}”</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* GOOGLE REVIEWS */}
-      <section className="section reviews-section">
-        <div className="container">
-          <div className="reviews-header">
-            <div className="reviews-brand">
-              <span className="google-g" aria-hidden="true">
-                <img
-                  src="https://www.gstatic.com/images/branding/product/2x/google_g_48dp.png"
-                  alt="Google logo"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </span>
-              <div>
-                <div className="reviews-title">Google Reviews</div>
-                <div className="reviews-sub">
-                  <span className="stars" aria-label="5 out of 5 stars">
-                    ★★★★★
-                  </span>{" "}
-                  <span className="reviews-count">25+ reviews</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="reviews-grid">
-            {[
-              {
-                name: "Angela Abel",
-                initial: "A",
-                quote:
-                  "Tim was great helping with design. They did an amazing job. Really went above and beyond to make sure everything is done right.",
-              },
-              {
-                name: "Rachel DeLord",
-                initial: "R",
-                quote:
-                  "We loved working with the team. Really helpful, thorough and professional throughout the entire process.",
-              },
-              {
-                name: "Karine B",
-                initial: "K",
-                quote:
-                  "The service was fantastic. Highly recommended. Everything was clean, smooth and well guided from start to finish.",
-              },
-            ].map((r) => (
-              <div key={r.name} className="review-card">
-                <div className="review-stars" aria-hidden="true">
-                  ★★★★★
-                </div>
-                <p className="review-quote">“{r.quote}”</p>
-                <div className="review-user">
-                  <div className="review-avatar" aria-hidden="true">
-                    {r.initial}
-                  </div>
-                  <div className="review-name">{r.name}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* MAIN LEAD FORM */}
+      {/* MAIN LEAD FORM (moved higher for 70% scroll visibility) */}
       <section className="section" id="main-form">
         <div className="container">
           <div className="two-col form-section">
@@ -781,6 +691,117 @@ function LandingPage() {
                 <p className="small-note">Your information is private and secure.</p>
               </form>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="section subtle-bg">
+        <div className="container">
+          <h2>What Investors Say</h2>
+          <div className="grid cards-3">
+            {[
+              {
+                city: "Investor - Bangalore",
+                quote:
+                  "I wanted to diversify outside India. The team explained the payment structure clearly and helped me secure my first Dubai property.",
+              },
+              {
+                city: "Investor - Mumbai",
+                quote:
+                  "The process was transparent and professional. I appreciated the guidance on rental returns and developer reputation.",
+              },
+              {
+                city: "Investor - Delhi NCR",
+                quote:
+                  "As an overseas investor, I needed clarity. The team helped me understand the regulations and investment structure.",
+              },
+            ].map((item) => (
+              <div key={item.city} className="card testimonial-card">
+                <p className="testimonial-city">{item.city}</p>
+                <p className="testimonial-quote">“{item.quote}”</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* GOOGLE REVIEWS */}
+      <section className="section reviews-section">
+        <div className="container">
+          <div className="reviews-header">
+            <div className="reviews-brand">
+              <span className="google-g" aria-hidden="true">
+                <svg
+                  viewBox="0 0 48 48"
+                  width="24"
+                  height="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill="#EA4335"
+                    d="M24 9.5c3.54 0 5.96 1.54 7.33 2.84l5.37-5.26C33.64 3.48 29.36 1.5 24 1.5 14.82 1.5 7.06 6.98 3.69 14.65l6.92 5.38C12.3 14.84 17.62 9.5 24 9.5z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M46.5 24.5c0-1.7-.15-2.94-.47-4.23H24v8.06h12.9c-.26 2.02-1.67 5.06-4.8 7.1l7.39 5.73C43.57 37.93 46.5 31.94 46.5 24.5z"
+                  />
+                  <path
+                    fill="#4A90E2"
+                    d="M10.61 28.02A14.5 14.5 0 0 1 9.5 24c0-1.4.24-2.76.66-4.02l-6.92-5.33C1.78 17.31 1 20.57 1 24c0 3.36.78 6.61 2.22 9.48l7.39-5.46z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M24 46.5c5.85 0 10.77-1.93 14.36-5.25l-7.39-5.73C29.14 36.83 26.88 37.5 24 37.5c-6.38 0-11.7-4.34-13.61-9.48l-7.39 5.46C7.06 41.02 14.82 46.5 24 46.5z"
+                  />
+                </svg>
+              </span>
+              <div>
+                <div className="reviews-title">Google Reviews</div>
+                <div className="reviews-sub">
+                  <span className="stars" aria-label="5 out of 5 stars">
+                    ★★★★★
+                  </span>{" "}
+                  <span className="reviews-count">25+ reviews</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="reviews-grid">
+            {[
+              {
+                name: "Angela Abel",
+                initial: "A",
+                quote:
+                  "Tim was great helping with design. They did an amazing job. Really went above and beyond to make sure everything is done right.",
+              },
+              {
+                name: "Rachel DeLord",
+                initial: "R",
+                quote:
+                  "We loved working with the team. Really helpful, thorough and professional throughout the entire process.",
+              },
+              {
+                name: "Karine B",
+                initial: "K",
+                quote:
+                  "The service was fantastic. Highly recommended. Everything was clean, smooth and well guided from start to finish.",
+              },
+            ].map((r) => (
+              <div key={r.name} className="review-card">
+                <div className="review-stars" aria-hidden="true">
+                  ★★★★★
+                </div>
+                <p className="review-quote">“{r.quote}”</p>
+                <div className="review-user">
+                  <div className="review-avatar" aria-hidden="true">
+                    {r.initial}
+                  </div>
+                  <div className="review-name">{r.name}</div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
