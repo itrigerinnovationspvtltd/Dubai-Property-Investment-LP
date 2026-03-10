@@ -1,0 +1,817 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
+const WHATSAPP_NUMBER = "YOUR_WHATSAPP_NUMBER_WITH_COUNTRY_CODE";
+const IMAGE_HERO =
+  "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1400&q=70";
+const IMAGE_LIFESTYLE =
+  "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=1400&q=70";
+const IMAGE_INTERIOR =
+  "https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&w=1400&q=70";
+
+function Icon({ name }) {
+  const common = {
+    width: 22,
+    height: 22,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg",
+    className: "svg-icon",
+    "aria-hidden": "true",
+  };
+
+  switch (name) {
+    case "shield":
+      return (
+        <svg {...common}>
+          <path
+            d="M12 2l7 4v6c0 5-3.5 9.3-7 10-3.5-.7-7-5-7-10V6l7-4z"
+            stroke="currentColor"
+            strokeWidth="1.8"
+          />
+          <path
+            d="M9.5 12l1.8 1.8 3.6-4"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
+    case "escrow":
+      return (
+        <svg {...common}>
+          <path
+            d="M4 10l8-6 8 6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10z"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M9 14h6M10 18h4"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+          />
+        </svg>
+      );
+    case "usd":
+      return (
+        <svg {...common}>
+          <path
+            d="M12 3v18"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+          />
+          <path
+            d="M16 7.5c0-1.7-1.8-3-4-3s-4 1.3-4 3 1.8 3 4 3 4 1.3 4 3-1.8 3-4 3-4-1.3-4-3"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+          />
+        </svg>
+      );
+    case "safe":
+      return (
+        <svg {...common}>
+          <path
+            d="M12 21s7-3.8 7-10V6l-7-4-7 4v5c0 6.2 7 10 7 10z"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M12 8.5a2.5 2.5 0 0 0-2.5 2.5V13a2.5 2.5 0 1 0 5 0v-2A2.5 2.5 0 0 0 12 8.5z"
+            stroke="currentColor"
+            strokeWidth="1.8"
+          />
+        </svg>
+      );
+    case "chart":
+      return (
+        <svg {...common}>
+          <path
+            d="M4 19V5"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+          />
+          <path
+            d="M4 19h16"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+          />
+          <path
+            d="M7 15l3-3 3 2 4-6"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
+    case "tax":
+      return (
+        <svg {...common}>
+          <path
+            d="M7 7h10v10H7V7z"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M9 9l6 6M15 9l-6 6"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+          />
+        </svg>
+      );
+    case "price":
+      return (
+        <svg {...common}>
+          <path
+            d="M20 10l-8 8-8-8 8-8 8 8z"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M12 8v4"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+          />
+          <path
+            d="M12 15h.01"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+        </svg>
+      );
+    case "time":
+      return (
+        <svg {...common}>
+          <path
+            d="M12 22a10 10 0 1 0-10-10 10 10 0 0 0 10 10z"
+            stroke="currentColor"
+            strokeWidth="1.8"
+          />
+          <path
+            d="M12 6v6l4 2"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
+    case "passport":
+      return (
+        <svg {...common}>
+          <path
+            d="M7 3h8a2 2 0 0 1 2 2v16H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"
+            stroke="currentColor"
+            strokeWidth="1.8"
+          />
+          <path
+            d="M9 8h6M9 12h6M9 16h4"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+          />
+        </svg>
+      );
+    default:
+      return (
+        <svg {...common}>
+          <path
+            d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"
+            stroke="currentColor"
+            strokeWidth="1.8"
+          />
+        </svg>
+      );
+  }
+}
+
+function LandingPage() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = React.useState({
+    name: "",
+    whatsapp: "",
+    email: "",
+    budget: "",
+    timeline: "",
+  });
+  const [submitting, setSubmitting] = React.useState(false);
+  const [error, setError] = React.useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (source) => async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setError("");
+    const waWindow = window.open("", "_blank");
+
+    try {
+      const response = await fetch("/send.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          source,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit. Please try again.");
+      }
+
+      const json = await response.json().catch(() => null);
+      if (json?.whatsapp_url && waWindow && !waWindow.closed) {
+        waWindow.location.href = json.whatsapp_url;
+      } else if (waWindow && !waWindow.closed) {
+        waWindow.close();
+      }
+
+      navigate("/thank-you");
+    } catch (err) {
+      if (waWindow && !waWindow.closed) waWindow.close();
+      setError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const openWhatsAppChat = () => {
+    const message = encodeURIComponent(
+      "Hi, I’m interested in Dubai property investment opportunities."
+    );
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank");
+  };
+
+  return (
+    <div className="page">
+      <Header
+        onWhatsApp={openWhatsAppChat}
+        onPrimaryCta={() => {
+          const el = document.getElementById("main-form");
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }}
+      />
+      {/* Floating WhatsApp Button */}
+      <button className="floating-whatsapp" onClick={openWhatsAppChat}>
+        Chat with a Dubai Property Advisor
+      </button>
+
+      {/* HERO SECTION */}
+      <section className="section hero">
+        <div className="hero-bg" style={{ backgroundImage: `url(${IMAGE_HERO})` }} />
+        <div className="container hero-grid">
+          <div className="hero-left">
+            <h1>Dubai Real Estate. Stable, Tax-Free, and Built for Global Investors.</h1>
+            <p className="hero-subtitle">
+              Transparent regulation, strong governance, and growing international demand
+              continue to attract investors to Dubai.
+            </p>
+            <p className="hero-trust">
+              Dubai Land Department Registered Transactions • RERA Regulated Market • Investors From
+              200+ Nationalities
+            </p>
+            <button className="btn primary" onClick={() => {
+              const el = document.getElementById("main-form");
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }}>
+              Get Investment Options →
+            </button>
+            <p className="supporting-text">
+              Free consultation with a Dubai property specialist.
+            </p>
+            <div className="hero-badges">
+              <div className="badge"><Icon name="shield" /> RERA-regulated</div>
+              <div className="badge"><Icon name="tax" /> 0% property tax</div>
+              <div className="badge"><Icon name="chart" /> 6–10% yields</div>
+            </div>
+          </div>
+
+          <div className="hero-right">
+            <div className="card form-card">
+              <h2>Get Curated Dubai Property Options</h2>
+              <form onSubmit={handleSubmit("Landing Page — Hero Form")}>
+                <div className="field">
+                  <label htmlFor="name">Full Name</label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Enter your full name"
+                  />
+                </div>
+                <div className="field">
+                  <label htmlFor="whatsapp">WhatsApp Number</label>
+                  <input
+                    id="whatsapp"
+                    name="whatsapp"
+                    type="tel"
+                    required
+                    value={formData.whatsapp}
+                    onChange={handleChange}
+                    placeholder="With country code, e.g. +91..."
+                  />
+                </div>
+                <div className="field">
+                  <label htmlFor="budget">Budget Range</label>
+                  <select
+                    id="budget"
+                    name="budget"
+                    required
+                    value={formData.budget}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select budget range</option>
+                    <option value="Under AED 500K">Under AED 500K</option>
+                    <option value="AED 500K–1M">AED 500K–1M</option>
+                    <option value="AED 1M–2M">AED 1M–2M</option>
+                    <option value="AED 2M+">AED 2M+</option>
+                  </select>
+                </div>
+                {error && <p className="error-text">{error}</p>}
+                <button className="btn primary full-width" type="submit" disabled={submitting}>
+                  {submitting ? "Submitting..." : "Get Investment Options"}
+                </button>
+                <p className="small-note">Your information is private and secure.</p>
+              </form>
+            </div>
+            <div className="hero-image-card">
+              <img
+                src={IMAGE_INTERIOR}
+                alt="Luxury Dubai apartment interior"
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="hero-image-overlay">
+                <div className="overlay-title">Verified projects • Flexible plans</div>
+                <div className="overlay-sub">Danube • DAMAC • Binghatti • Sobha</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* MARKET SNAPSHOT */}
+      <section className="section subtle-bg">
+        <div className="container">
+          <div className="stats-strip">
+            {[
+              { label: "Deals in 2025", value: "270,000+", icon: "chart" },
+              { label: "Market Value", value: "AED 917B", icon: "price" },
+              { label: "Rental Yield", value: "6–10%", icon: "chart" },
+              { label: "Nationalities Investing", value: "200+", icon: "passport" },
+              { label: "Property Tax", value: "0%", icon: "tax" },
+            ].map((item) => (
+              <div key={item.label} className="stat-card">
+                <div className="stat-icon">
+                  <Icon name={item.icon} />
+                </div>
+                <p className="stat-value">{item.value}</p>
+                <p className="stat-label">{item.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* STABILITY & INVESTOR CONFIDENCE */}
+      <section className="section">
+        <div className="container two-col">
+          <div>
+            <h2>A Market Built on Stability</h2>
+            <p>
+              While global markets experience uncertainty, Dubai continues to operate
+              normally with strong governance, transparent regulation, and consistent
+              real estate activity.
+            </p>
+            <p>
+              Property transactions are regulated by the Dubai Land Department and the
+              Real Estate Regulatory Authority (RERA), ensuring secure ownership and
+              investor protection.
+            </p>
+          </div>
+          <div className="icon-list">
+            {[
+              { icon: "shield", text: "Government-regulated property transactions" },
+              { icon: "escrow", text: "Escrow protection for off-plan developments" },
+              { icon: "usd", text: "Stable currency pegged to the US Dollar" },
+              { icon: "safe", text: "One of the safest cities globally" },
+            ].map((item) => (
+              <div key={item.text} className="icon-list-item">
+                <span className="icon-bubble">
+                  <Icon name={item.icon} />
+                </span>
+                <span>{item.text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* WHY INDIAN INVESTORS CHOOSE DUBAI */}
+      <section className="section subtle-bg">
+        <div className="container">
+          <h2>Why Indian Investors Choose Dubai</h2>
+          <div className="grid cards-3">
+            {[
+              { icon: "time", text: "Only 3–4 hours from major Indian cities" },
+              { icon: "passport", text: "One of the largest Indian communities globally" },
+              { icon: "shield", text: "Simple international property ownership process" },
+              { icon: "price", text: "Flexible developer payment plans" },
+              { icon: "chart", text: "Strong rental demand across key areas" },
+              { icon: "passport", text: "Golden Visa eligibility for investments above AED 2 million" },
+              { icon: "usd", text: "AED pegged to USD - protecting returns from INR depreciation" },
+            ].map((item) => (
+              <div key={item.text} className="card feature-card">
+                <div className="feature-icon">
+                  <Icon name={item.icon} />
+                </div>
+                <p>{item.text}</p>
+              </div>
+            ))}
+          </div>
+          <p className="highlight-line">
+            Dubai offers Indian investors a stable international asset with tax-free income
+            potential.
+          </p>
+        </div>
+      </section>
+
+      {/* INVESTMENT OPPORTUNITY / RETURNS */}
+      <section className="section">
+        <div className="container">
+          <h2>Strong Rental Demand and Long-Term Growth</h2>
+          <p>
+            Dubai’s expanding economy and growing population continue to support strong
+            housing demand.
+          </p>
+          <div className="grid cards-3">
+            <div className="card metric-card">
+              <h3>Rental Yield</h3>
+              <p className="metric-value">6–10%</p>
+            </div>
+            <div className="card metric-card">
+              <h3>Property Tax</h3>
+              <p className="metric-value">0%</p>
+            </div>
+            <div className="card metric-card">
+              <h3>Starting Price</h3>
+              <p className="metric-value">AED 750K+</p>
+            </div>
+          </div>
+          <div className="image-row">
+            <div className="image-tile">
+              <img
+                src={IMAGE_LIFESTYLE}
+                alt="Dubai Marina lifestyle and skyline"
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="image-tile-caption">Dubai Marina</div>
+            </div>
+            <div className="image-tile">
+              <img
+                src={IMAGE_HERO}
+                alt="Dubai skyline at dusk"
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="image-tile-caption">Business Bay</div>
+            </div>
+            <div className="image-tile">
+              <img
+                src={IMAGE_INTERIOR}
+                alt="Modern apartment interior"
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="image-tile-caption">JVC</div>
+            </div>
+          </div>
+          <p className="supporting-text">
+            Areas like JVC, Dubai Marina, and Business Bay consistently deliver 7–9% annual
+            rental returns, with zero property tax on residential rental income and flexible
+            developer payment plans.
+          </p>
+        </div>
+      </section>
+
+      {/* TRUSTED DEVELOPERS */}
+      <section className="section subtle-bg">
+        <div className="container">
+          <h2>Projects From Leading Dubai Developers</h2>
+          <div className="developer-logos">
+            {["Danube", "DAMAC", "Binghatti", "Sobha", "Azizi", "Object 1"].map(
+              (dev) => (
+                <div key={dev} className="developer-logo card">
+                  <span className="developer-text">{dev}</span>
+                </div>
+              )
+            )}
+          </div>
+          <p className="supporting-text">
+            All projects are registered with Dubai Land Department and protected through
+            escrow regulations.
+          </p>
+        </div>
+      </section>
+
+      {/* ABOUT US */}
+      <section className="section">
+        <div className="container two-col">
+          <div>
+            <h2>About Infinite Imperial Ventures</h2>
+            <p>
+              Infinite Imperial Ventures is a Dubai-based real estate brokerage helping
+              international investors access verified property opportunities across the
+              city’s leading developments.
+            </p>
+            <p>
+              Our team works closely with RERA-registered developers and guides investors
+              through the full process - from property selection to Dubai Land Department registration.
+            </p>
+          </div>
+          <div>
+            <p>
+              We focus on transparency, structured investment guidance, and long-term client
+              relationships.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* PROCESS */}
+      <section className="section subtle-bg">
+        <div className="container">
+          <h2>Your Investment Journey in Four Steps</h2>
+          <div className="grid cards-4">
+            {[
+              { step: "1", title: "Share preferences", text: "Share your investment preferences and budget." },
+              { step: "2", title: "Receive options", text: "Receive curated property options aligned with your goals." },
+              { step: "3", title: "Review details", text: "Review payment plans, developer reputation, and location advantages." },
+              { step: "4", title: "Secure property", text: "Secure your property through Dubai Land Department registration." },
+            ].map((item) => (
+              <div key={item.step} className="card step-card">
+                <div className="step-number">{item.step}</div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* MONEY PROTECTION */}
+      <section className="section">
+        <div className="container two-col">
+          <div>
+            <h2>Your Investment Is Protected by UAE Law</h2>
+            <p>
+              Off-plan payments are held in <strong>RERA regulated escrow accounts</strong>.
+            </p>
+            <p>
+              Funds are released to developers only when verified construction milestones
+              are completed, ensuring transparency and protecting investor capital.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="section subtle-bg">
+        <div className="container">
+          <h2>What Investors Say</h2>
+          <div className="grid cards-3">
+            {[
+              {
+                city: "Investor - Bangalore",
+                quote:
+                  "I wanted to diversify outside India. The team explained the payment structure clearly and helped me secure my first Dubai property.",
+              },
+              {
+                city: "Investor - Mumbai",
+                quote:
+                  "The process was transparent and professional. I appreciated the guidance on rental returns and developer reputation.",
+              },
+              {
+                city: "Investor - Delhi NCR",
+                quote:
+                  "As an overseas investor, I needed clarity. The team helped me understand the regulations and investment structure.",
+              },
+            ].map((item) => (
+              <div key={item.city} className="card testimonial-card">
+                <p className="testimonial-city">{item.city}</p>
+                <p className="testimonial-quote">“{item.quote}”</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* GOOGLE REVIEWS */}
+      <section className="section reviews-section">
+        <div className="container">
+          <div className="reviews-header">
+            <div className="reviews-brand">
+              <span className="google-g" aria-hidden="true">
+                <img
+                  src="https://www.gstatic.com/images/branding/product/2x/google_g_48dp.png"
+                  alt="Google logo"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </span>
+              <div>
+                <div className="reviews-title">Google Reviews</div>
+                <div className="reviews-sub">
+                  <span className="stars" aria-label="5 out of 5 stars">
+                    ★★★★★
+                  </span>{" "}
+                  <span className="reviews-count">25+ reviews</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="reviews-grid">
+            {[
+              {
+                name: "Angela Abel",
+                initial: "A",
+                quote:
+                  "Tim was great helping with design. They did an amazing job. Really went above and beyond to make sure everything is done right.",
+              },
+              {
+                name: "Rachel DeLord",
+                initial: "R",
+                quote:
+                  "We loved working with the team. Really helpful, thorough and professional throughout the entire process.",
+              },
+              {
+                name: "Karine B",
+                initial: "K",
+                quote:
+                  "The service was fantastic. Highly recommended. Everything was clean, smooth and well guided from start to finish.",
+              },
+            ].map((r) => (
+              <div key={r.name} className="review-card">
+                <div className="review-stars" aria-hidden="true">
+                  ★★★★★
+                </div>
+                <p className="review-quote">“{r.quote}”</p>
+                <div className="review-user">
+                  <div className="review-avatar" aria-hidden="true">
+                    {r.initial}
+                  </div>
+                  <div className="review-name">{r.name}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* MAIN LEAD FORM */}
+      <section className="section" id="main-form">
+        <div className="container">
+          <div className="two-col form-section">
+            <div>
+              <h2>Receive Curated Dubai Investment Opportunities</h2>
+              <p>
+                Submit your details to receive verified property options aligned with your
+                investment goals.
+              </p>
+            </div>
+            <div className="card form-card">
+              <form onSubmit={handleSubmit("Landing Page — Main Form")}>
+                <div className="field">
+                  <label htmlFor="name-main">Full Name</label>
+                  <input
+                    id="name-main"
+                    name="name"
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Enter your full name"
+                  />
+                </div>
+                <div className="field">
+                  <label htmlFor="whatsapp-main">WhatsApp Number</label>
+                  <input
+                    id="whatsapp-main"
+                    name="whatsapp"
+                    type="tel"
+                    required
+                    value={formData.whatsapp}
+                    onChange={handleChange}
+                    placeholder="With country code, e.g. +91..."
+                  />
+                </div>
+                <div className="field">
+                  <label htmlFor="email-main">Email Address</label>
+                  <input
+                    id="email-main"
+                    name="email"
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Enter your email"
+                  />
+                </div>
+                <div className="field">
+                  <label htmlFor="budget-main">Budget Range</label>
+                  <select
+                    id="budget-main"
+                    name="budget"
+                    required
+                    value={formData.budget}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select budget range</option>
+                    <option value="Under AED 500K">Under AED 500K</option>
+                    <option value="AED 500K–1M">AED 500K–1M</option>
+                    <option value="AED 1M–2M">AED 1M–2M</option>
+                    <option value="AED 2M+">AED 2M+</option>
+                  </select>
+                </div>
+                <div className="field">
+                  <label htmlFor="timeline">Investment Timeline</label>
+                  <select
+                    id="timeline"
+                    name="timeline"
+                    required
+                    value={formData.timeline}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select timeline</option>
+                    <option value="Within 3 months">Within 3 months</option>
+                    <option value="3–6 months">3–6 months</option>
+                    <option value="6–12 months">6–12 months</option>
+                    <option value="Just exploring">Just exploring</option>
+                  </select>
+                </div>
+                {error && <p className="error-text">{error}</p>}
+                <button className="btn primary full-width" type="submit" disabled={submitting}>
+                  {submitting ? "Submitting..." : "Send Me Investment Options →"}
+                </button>
+                <p className="small-note">Your information is private and secure.</p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL CTA */}
+      <section className="section subtle-bg">
+        <div className="container final-cta">
+          <h2>Speak With a Dubai Property Specialist</h2>
+          <p>Connect with an advisor who works with international investors in Dubai.</p>
+          <p>No obligation. Just honest guidance.</p>
+          <div className="cta-buttons">
+            <button className="btn secondary" onClick={openWhatsAppChat}>
+              WhatsApp Us
+            </button>
+            <button
+              className="btn primary-outline"
+              onClick={() => {
+                const el = document.getElementById("main-form");
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Request a Callback
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+}
+
+export default LandingPage;
+
