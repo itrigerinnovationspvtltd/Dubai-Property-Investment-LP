@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-const WHATSAPP_NUMBER = "YOUR_WHATSAPP_NUMBER_WITH_COUNTRY_CODE";
+const WHATSAPP_NUMBER = "917011202967";
 
 function ThankYouPage() {
   const openWhatsAppChat = () => {

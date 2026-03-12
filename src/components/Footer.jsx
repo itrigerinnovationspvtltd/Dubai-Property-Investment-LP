@@ -10,6 +10,7 @@ function Footer() {
             Verified Dubai property opportunities for international investors. RERA-aligned
             process, escrow protection, and transparent guidance.
           </p>
+          <p className="footer-text footer-meta">RERA No. 46838</p>
         </div>
         <div className="footer-col">
           <div className="footer-title">Investor Support</div>

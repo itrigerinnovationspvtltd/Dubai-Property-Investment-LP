@@ -35,7 +35,7 @@ if ($name === '' || $whatsapp === '' || $budget === '') {
     exit;
 }
 
-$to = 'YOUR_LEAD_EMAIL@example.com'; // TODO: replace with your email
+$to = 'socialmedia@iivre.com';
 $subject = 'New Dubai Property Lead - ' . $source;
 
 $body = "New Dubai Property Investment Lead\n\n";
@@ -47,14 +47,14 @@ $body .= "Investment Timeline: {$timeline}\n";
 $body .= "Source: {$source}\n";
 $body .= "Submitted At: " . date('Y-m-d H:i:s') . "\n";
 
-$headers = "From: no-reply@yourdomain.com\r\n";
-$headers .= "Reply-To: " . ($email !== '' ? $email : 'no-reply@yourdomain.com') . "\r\n";
+$headers = "From: no-reply@iivre.com\r\n";
+$headers .= "Reply-To: " . ($email !== '' ? $email : 'no-reply@iivre.com') . "\r\n";
 
 // Send email (configure your server for mail sending)
 @mail($to, $subject, $body, $headers);
 
 // Build WhatsApp URL (to your company WhatsApp number) so the frontend can open it.
-$companyWhatsAppNumber = 'YOUR_COMPANY_WHATSAPP_NUMBER_WITH_COUNTRY_CODE'; // e.g. 9715XXXXXXXX
+$companyWhatsAppNumber = '917011202967';
 $waNumber = preg_replace('/\D+/', '', $companyWhatsAppNumber);
 $waMessage = "Hi, I'm interested in Dubai property investment options.%0A%0A";
 $waMessage .= "Name: " . rawurlencode($name) . "%0A";

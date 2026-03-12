@@ -3,13 +3,21 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-const WHATSAPP_NUMBER = "YOUR_WHATSAPP_NUMBER_WITH_COUNTRY_CODE";
-const IMAGE_HERO =
-  "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1400&q=70";
-const IMAGE_LIFESTYLE =
-  "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=1400&q=70";
-const IMAGE_INTERIOR =
-  "https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&w=1400&q=70";
+const WHATSAPP_NUMBER = "917011202967";
+const IMAGE_HERO = "/images/hero-skyline.png";
+const IMAGE_FEATURE_1 = "/images/project-skyvue-spectra.jpg";
+const IMAGE_FEATURE_2 = "/images/project-avarra-palace.png";
+const IMAGE_FEATURE_3 = "/images/project-lagoon.jpg";
+const IMAGE_ABOUT = "/images/project-c07.jpg";
+
+const DEV_LOGOS = [
+  { name: "Danube", src: "/images/DANUBE.jpeg" },
+  { name: "DAMAC", src: "/images/DAMAC.jpeg" },
+  { name: "Binghatti", src: "/images/BINGHATTI.jpeg" },
+  { name: "Sobha", src: "/images/SOBHS.jpeg" },
+  { name: "Azizi", src: "/images/AZIZI.jpeg" },
+  { name: "Object 1", src: "/images/OBJECT1.jpeg" },
+];
 
 function Icon({ name }) {
   const common = {
@@ -211,6 +219,32 @@ function LandingPage() {
   });
   const [submitting, setSubmitting] = React.useState(false);
   const [error, setError] = React.useState("");
+  const [showLeadPopup, setShowLeadPopup] = React.useState(false);
+
+  React.useEffect(() => {
+    const key = "leadPopupDismissed";
+    const dismissed = sessionStorage.getItem(key) === "1";
+    if (dismissed) return;
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        ticking = false;
+        const doc = document.documentElement;
+        const scrollTop = doc.scrollTop || document.body.scrollTop || 0;
+        const maxScroll = Math.max(1, doc.scrollHeight - doc.clientHeight);
+        const progress = scrollTop / maxScroll;
+        if (progress >= 0.7) {
+          setShowLeadPopup(true);
+        }
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -247,6 +281,8 @@ function LandingPage() {
       }
 
       navigate("/thank-you");
+      setShowLeadPopup(false);
+      sessionStorage.setItem("leadPopupDismissed", "1");
     } catch (err) {
       if (waWindow && !waWindow.closed) waWindow.close();
       setError(err.message || "Something went wrong. Please try again.");
@@ -283,12 +319,10 @@ function LandingPage() {
           <div className="hero-left">
             <h1>Dubai Real Estate. Stable, Tax-Free, and Built for Global Investors.</h1>
             <p className="hero-subtitle">
-              Transparent regulation, strong governance, and growing international demand
-              continue to attract investors to Dubai.
+              Tax-free rental income potential, high demand areas, and a globally regulated market.
             </p>
             <p className="hero-trust">
-              Dubai Land Department Registered Transactions • RERA Regulated Market • Investors From
-              200+ Nationalities
+              Dubai Land Department Registered • RERA Regulated (RERA No. 46838) • 200+ Nationalities Investing
             </p>
             <button className="btn primary" onClick={() => {
               const el = document.getElementById("main-form");
@@ -309,7 +343,7 @@ function LandingPage() {
             <div className="hero-right">
             <div className="card form-card">
               <h2>Get Curated Dubai Property Options</h2>
-              <form onSubmit={handleSubmit("Landing Page — Hero Form")}>
+              <form onSubmit={handleSubmit("Landing Page - Hero Form")}>
                 <div className="field">
                   <label htmlFor="name">Full Name</label>
                   <input
@@ -344,10 +378,10 @@ function LandingPage() {
                     onChange={handleChange}
                   >
                     <option value="">Select budget range</option>
-                    <option value="Under AED 500K">Under AED 500K</option>
-                    <option value="AED 500K–1M">AED 500K–1M</option>
-                    <option value="AED 1M–2M">AED 1M–2M</option>
-                    <option value="AED 2M+">AED 2M+</option>
+                    <option value="Under ₹1 Cr">Under ₹1 Cr</option>
+                    <option value="₹1–2 Cr">₹1–2 Cr</option>
+                    <option value="₹2–4 Cr">₹2–4 Cr</option>
+                    <option value="₹4 Cr+">₹4 Cr+</option>
                   </select>
                 </div>
                 {error && <p className="error-text">{error}</p>}
@@ -359,14 +393,14 @@ function LandingPage() {
             </div>
             <div className="hero-image-card">
               <img
-                src={IMAGE_INTERIOR}
-                alt="Luxury Dubai apartment interior"
+                src={IMAGE_FEATURE_1}
+                alt="Dubai project rendering"
                 loading="lazy"
                 decoding="async"
               />
               <div className="hero-image-overlay">
                 <div className="overlay-title">Verified projects • Flexible plans</div>
-                <div className="overlay-sub">Danube • DAMAC • Binghatti • Sobha</div>
+                <div className="overlay-sub">Trusted developers • RERA escrow protection</div>
               </div>
             </div>
           </div>
@@ -379,7 +413,7 @@ function LandingPage() {
           <div className="stats-strip">
             {[
               { label: "Deals in 2025", value: "270,000+", icon: "chart" },
-              { label: "Market Value", value: "AED 917B", icon: "price" },
+              { label: "Market Value (approx.)", value: "₹ 20T+", icon: "price" },
               { label: "Rental Yield", value: "6–10%", icon: "chart" },
               { label: "Nationalities Investing", value: "200+", icon: "passport" },
               { label: "Property Tax", value: "0%", icon: "tax" },
@@ -445,7 +479,7 @@ function LandingPage() {
               { icon: "shield", text: "Simple international property ownership process" },
               { icon: "price", text: "Flexible developer payment plans" },
               { icon: "chart", text: "Strong rental demand across key areas" },
-              { icon: "passport", text: "Golden Visa eligibility for investments above AED 2 million" },
+              { icon: "passport", text: "Golden Visa eligibility for investments above ₹4.5 Cr+ (approx.)" },
               { icon: "usd", text: "AED pegged to USD - protecting returns from INR depreciation" },
             ].map((item) => (
               <div key={item.text} className="card feature-card">
@@ -482,36 +516,36 @@ function LandingPage() {
             </div>
             <div className="card metric-card">
               <h3>Starting Price</h3>
-              <p className="metric-value">AED 750K+</p>
+              <p className="metric-value">₹ 1.7 Cr+</p>
             </div>
           </div>
-          <div className="image-row">
+          <div className="image-collage">
             <div className="image-tile">
               <img
-                src={IMAGE_LIFESTYLE}
-                alt="Dubai Marina lifestyle and skyline"
+                src={IMAGE_FEATURE_2}
+                alt="Project exterior rendering"
                 loading="lazy"
                 decoding="async"
               />
-              <div className="image-tile-caption">Dubai Marina</div>
+              <div className="image-tile-caption">Premium communities</div>
             </div>
             <div className="image-tile">
               <img
                 src={IMAGE_HERO}
-                alt="Dubai skyline at dusk"
+                alt="Dubai skyline"
                 loading="lazy"
                 decoding="async"
               />
-              <div className="image-tile-caption">Business Bay</div>
+              <div className="image-tile-caption">Dubai skyline</div>
             </div>
             <div className="image-tile">
               <img
-                src={IMAGE_INTERIOR}
-                alt="Modern apartment interior"
+                src={IMAGE_FEATURE_3}
+                alt="Lifestyle community rendering"
                 loading="lazy"
                 decoding="async"
               />
-              <div className="image-tile-caption">JVC</div>
+              <div className="image-tile-caption">Lifestyle amenities</div>
             </div>
           </div>
           <p className="supporting-text">
@@ -526,14 +560,14 @@ function LandingPage() {
       <section className="section subtle-bg">
         <div className="container">
           <h2>Projects From Leading Dubai Developers</h2>
-          <div className="developer-logos">
-            {["Danube", "DAMAC", "Binghatti", "Sobha", "Azizi", "Object 1"].map(
-              (dev) => (
-                <div key={dev} className="developer-logo card">
-                  <span className="developer-text">{dev}</span>
+          <div className="logo-carousel" aria-label="Developer logos">
+            <div className="logo-track">
+              {[...DEV_LOGOS, ...DEV_LOGOS].map((logo, idx) => (
+                <div className="logo-item" key={`${logo.name}-${idx}`}>
+                  <img src={logo.src} alt={`${logo.name} logo`} loading="lazy" decoding="async" />
                 </div>
-              )
-            )}
+              ))}
+            </div>
           </div>
           <p className="supporting-text">
             All projects are registered with Dubai Land Department and protected through
@@ -544,9 +578,9 @@ function LandingPage() {
 
       {/* ABOUT US */}
       <section className="section">
-        <div className="container two-col">
+        <div className="container two-col media-two-col">
           <div>
-            <h2>About Infinite Imperial Ventures</h2>
+            <h2>About Us</h2>
             <p>
               Infinite Imperial Ventures is a Dubai-based real estate brokerage helping
               international investors access verified property opportunities across the
@@ -556,6 +590,13 @@ function LandingPage() {
               Our team works closely with RERA-registered developers and guides investors
               through the full process - from property selection to Dubai Land Department registration.
             </p>
+          </div>
+          <div className="media-card">
+            <img src={IMAGE_ABOUT} alt="Dubai project view" loading="lazy" decoding="async" />
+            <div className="media-overlay">
+              <div className="media-title">Dubai-based guidance</div>
+              <div className="media-sub">Transparent process • Verified projects</div>
+            </div>
           </div>
           <div>
             <p>
@@ -589,16 +630,38 @@ function LandingPage() {
 
       {/* MONEY PROTECTION */}
       <section className="section">
-        <div className="container two-col">
+        <div className="container two-col media-two-col">
           <div>
             <h2>Your Investment Is Protected by UAE Law</h2>
             <p>
               Off-plan payments are held in <strong>RERA regulated escrow accounts</strong>.
             </p>
-            <p>
-              Funds are released to developers only when verified construction milestones
-              are completed, ensuring transparency and protecting investor capital.
-            </p>
+            <div className="protection-points">
+              <div className="protection-point">
+                <span className="dot" aria-hidden="true" />
+                Funds are released only after verified construction milestones.
+              </div>
+              <div className="protection-point">
+                <span className="dot" aria-hidden="true" />
+                Transparent registration through Dubai Land Department.
+              </div>
+              <div className="protection-point">
+                <span className="dot" aria-hidden="true" />
+                Clear developer checks and documentation support.
+              </div>
+            </div>
+          </div>
+          <div className="media-card protection-card">
+            <img
+              src={IMAGE_FEATURE_1}
+              alt="Dubai development"
+              loading="lazy"
+              decoding="async"
+            />
+            <div className="media-overlay">
+              <div className="media-title">Escrow-protected payments</div>
+              <div className="media-sub">Milestone-based releases • Investor safeguards</div>
+            </div>
           </div>
         </div>
       </section>
@@ -606,16 +669,28 @@ function LandingPage() {
       {/* MAIN LEAD FORM (moved higher for 70% scroll visibility) */}
       <section className="section" id="main-form">
         <div className="container">
-          <div className="two-col form-section">
+          <div className="two-col form-section media-two-col">
             <div>
               <h2>Receive Curated Dubai Investment Opportunities</h2>
               <p>
                 Submit your details to receive verified property options aligned with your
                 investment goals.
               </p>
+              <div className="media-card mini-media">
+                <img
+                  src={IMAGE_FEATURE_2}
+                  alt="Verified Dubai developments"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="media-overlay">
+                  <div className="media-title">Curated options for your budget</div>
+                  <div className="media-sub">Payment plans • Rental yield focus</div>
+                </div>
+              </div>
             </div>
             <div className="card form-card">
-              <form onSubmit={handleSubmit("Landing Page — Main Form")}>
+              <form onSubmit={handleSubmit("Landing Page - Main Form")}>
                 <div className="field">
                   <label htmlFor="name-main">Full Name</label>
                   <input
@@ -662,10 +737,10 @@ function LandingPage() {
                     onChange={handleChange}
                   >
                     <option value="">Select budget range</option>
-                    <option value="Under AED 500K">Under AED 500K</option>
-                    <option value="AED 500K–1M">AED 500K–1M</option>
-                    <option value="AED 1M–2M">AED 1M–2M</option>
-                    <option value="AED 2M+">AED 2M+</option>
+                    <option value="Under ₹1 Cr">Under ₹1 Cr</option>
+                    <option value="₹1–2 Cr">₹1–2 Cr</option>
+                    <option value="₹2–4 Cr">₹2–4 Cr</option>
+                    <option value="₹4 Cr+">₹4 Cr+</option>
                   </select>
                 </div>
                 <div className="field">
@@ -691,37 +766,6 @@ function LandingPage() {
                 <p className="small-note">Your information is private and secure.</p>
               </form>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="section subtle-bg">
-        <div className="container">
-          <h2>What Investors Say</h2>
-          <div className="grid cards-3">
-            {[
-              {
-                city: "Investor - Bangalore",
-                quote:
-                  "I wanted to diversify outside India. The team explained the payment structure clearly and helped me secure my first Dubai property.",
-              },
-              {
-                city: "Investor - Mumbai",
-                quote:
-                  "The process was transparent and professional. I appreciated the guidance on rental returns and developer reputation.",
-              },
-              {
-                city: "Investor - Delhi NCR",
-                quote:
-                  "As an overseas investor, I needed clarity. The team helped me understand the regulations and investment structure.",
-              },
-            ].map((item) => (
-              <div key={item.city} className="card testimonial-card">
-                <p className="testimonial-city">{item.city}</p>
-                <p className="testimonial-quote">“{item.quote}”</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -806,6 +850,37 @@ function LandingPage() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section className="section subtle-bg">
+        <div className="container">
+          <h2>Frequently Asked Questions</h2>
+          <div className="faq-grid">
+            <details className="faq-item">
+              <summary>Can I get a home loan from India?</summary>
+              <p>
+                Many investors choose to fund via savings, developer payment plans, or loans arranged in
+                India. Eligibility depends on your bank and profile. We can share payment-plan options
+                that reduce upfront burden.
+              </p>
+            </details>
+            <details className="faq-item">
+              <summary>Do I need to visit Dubai?</summary>
+              <p>
+                Not always. Property selection, documentation, and booking can often be handled remotely.
+                Visiting is optional and can help with area shortlisting.
+              </p>
+            </details>
+            <details className="faq-item">
+              <summary>How is rental income taxed in India?</summary>
+              <p>
+                Dubai rental income may be taxable in India depending on your residential status and
+                applicable rules. We recommend confirming with your tax advisor for your specific case.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
       {/* FINAL CTA */}
       <section className="section subtle-bg">
         <div className="container final-cta">
@@ -828,6 +903,88 @@ function LandingPage() {
           </div>
         </div>
       </section>
+
+      {showLeadPopup && (
+        <div
+          className="lead-popup-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Investment options form"
+          onClick={() => {
+            setShowLeadPopup(false);
+            sessionStorage.setItem("leadPopupDismissed", "1");
+          }}
+        >
+          <div className="lead-popup" onClick={(e) => e.stopPropagation()}>
+            <div className="lead-popup-header">
+              <div>
+                <div className="lead-popup-title">Get Curated Dubai Options</div>
+                <div className="lead-popup-sub">Share your details. We’ll send verified options.</div>
+              </div>
+              <button
+                type="button"
+                className="lead-popup-close"
+                aria-label="Close"
+                onClick={() => {
+                  setShowLeadPopup(false);
+                  sessionStorage.setItem("leadPopupDismissed", "1");
+                }}
+              >
+                ✕
+              </button>
+            </div>
+            <div className="lead-popup-body">
+              <form onSubmit={handleSubmit("Landing Page - Scroll Popup")}>
+                <div className="field">
+                  <label htmlFor="name-popup">Full Name</label>
+                  <input
+                    id="name-popup"
+                    name="name"
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Enter your full name"
+                  />
+                </div>
+                <div className="field">
+                  <label htmlFor="whatsapp-popup">WhatsApp Number</label>
+                  <input
+                    id="whatsapp-popup"
+                    name="whatsapp"
+                    type="tel"
+                    required
+                    value={formData.whatsapp}
+                    onChange={handleChange}
+                    placeholder="With country code, e.g. +91..."
+                  />
+                </div>
+                <div className="field">
+                  <label htmlFor="budget-popup">Budget Range</label>
+                  <select
+                    id="budget-popup"
+                    name="budget"
+                    required
+                    value={formData.budget}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select budget range</option>
+                    <option value="Under ₹1 Cr">Under ₹1 Cr</option>
+                    <option value="₹1–2 Cr">₹1–2 Cr</option>
+                    <option value="₹2–4 Cr">₹2–4 Cr</option>
+                    <option value="₹4 Cr+">₹4 Cr+</option>
+                  </select>
+                </div>
+                {error && <p className="error-text">{error}</p>}
+                <button className="btn primary full-width" type="submit" disabled={submitting}>
+                  {submitting ? "Submitting..." : "Send Me Options →"}
+                </button>
+                <p className="small-note">Your information is private and secure.</p>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>
