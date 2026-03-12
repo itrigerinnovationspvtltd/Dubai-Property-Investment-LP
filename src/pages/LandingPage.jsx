@@ -321,9 +321,7 @@ function LandingPage() {
             <p className="hero-subtitle">
               Tax-free rental income potential, high demand areas, and a globally regulated market.
             </p>
-            <p className="hero-trust">
-              Dubai Land Department Registered • RERA Regulated (RERA No. 46838) • 200+ Nationalities Investing
-            </p>
+       
             <button className="btn primary" onClick={() => {
               const el = document.getElementById("main-form");
               if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -333,11 +331,6 @@ function LandingPage() {
             <p className="supporting-text">
               Free consultation with a Dubai property specialist.
             </p>
-            <div className="hero-badges">
-              <div className="badge"><Icon name="shield" /> RERA-regulated</div>
-              <div className="badge"><Icon name="tax" /> 0% property tax</div>
-              <div className="badge"><Icon name="chart" /> 6–10% yields</div>
-            </div>
           </div>
 
             <div className="hero-right">
@@ -391,18 +384,7 @@ function LandingPage() {
                 <p className="small-note">Your information is private and secure.</p>
               </form>
             </div>
-            <div className="hero-image-card">
-              <img
-                src={IMAGE_FEATURE_1}
-                alt="Dubai project rendering"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="hero-image-overlay">
-                <div className="overlay-title">Verified projects • Flexible plans</div>
-                <div className="overlay-sub">Trusted developers • RERA escrow protection</div>
-              </div>
-            </div>
+            
           </div>
         </div>
       </section>
