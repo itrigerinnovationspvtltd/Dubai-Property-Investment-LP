@@ -227,6 +227,7 @@ function LandingPage() {
     if (dismissed) return;
 
     let ticking = false;
+    let fired = false;
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
@@ -235,9 +236,12 @@ function LandingPage() {
         const doc = document.documentElement;
         const scrollTop = doc.scrollTop || document.body.scrollTop || 0;
         const maxScroll = Math.max(1, doc.scrollHeight - doc.clientHeight);
-        const progress = scrollTop / maxScroll;
-        if (progress >= 0.7) {
+        const progress = scrollTop / maxScroll; // 0 - 1
+        if (!fired && progress >= 0.52) {
+          fired = true;
+          sessionStorage.setItem(key, "1");
           setShowLeadPopup(true);
+          window.removeEventListener("scroll", onScroll);
         }
       });
     };
@@ -371,10 +375,10 @@ function LandingPage() {
                     onChange={handleChange}
                   >
                     <option value="">Select budget range</option>
-                    <option value="Under ₹1 Cr">Under ₹1 Cr</option>
-                    <option value="₹1–2 Cr">₹1–2 Cr</option>
-                    <option value="₹2–4 Cr">₹2–4 Cr</option>
-                    <option value="₹4 Cr+">₹4 Cr+</option>
+                    <option value="₹2–3 Cr">₹2–3 Cr</option>
+                    <option value="₹3–4 Cr">₹3–4 Cr</option>
+                    <option value="₹4–6 Cr">₹4–6 Cr</option>
+                    <option value="₹6 Cr+">₹6 Cr+</option>
                   </select>
                 </div>
                 {error && <p className="error-text">{error}</p>}
@@ -498,7 +502,7 @@ function LandingPage() {
             </div>
             <div className="card metric-card">
               <h3>Starting Price</h3>
-              <p className="metric-value">₹ 1.7 Cr+</p>
+              <p className="metric-value">₹ 1.9 Cr+</p>
             </div>
           </div>
           <div className="image-collage">
@@ -564,13 +568,12 @@ function LandingPage() {
           <div>
             <h2>About Us</h2>
             <p>
-              Infinite Imperial Ventures is a Dubai-based real estate brokerage helping
-              international investors access verified property opportunities across the
-              city’s leading developments.
+            Infinite Imperial Ventures is a Dubai-based real estate brokerage helping international investors access verified property opportunities across the city’s leading developments.
             </p>
             <p>
-              Our team works closely with RERA-registered developers and guides investors
-              through the full process - from property selection to Dubai Land Department registration.
+            Our team brings over 10 years of combined experience in the Dubai real estate market, working closely with RERA-registered developers and Dubai Land Department–regulated transactions to ensure a transparent and secure investment process.
+<br></br>
+We guide investors through the entire journey — from property selection and payment planning to final registration — making international property investment in Dubai simple and structured.
             </p>
           </div>
           <div className="media-card">
@@ -582,8 +585,7 @@ function LandingPage() {
           </div>
           <div>
             <p>
-              We focus on transparency, structured investment guidance, and long-term client
-              relationships.
+            Our focus is on clear advice, trusted developer partnerships, and long-term relationships with our clients.
             </p>
           </div>
         </div>
@@ -719,10 +721,10 @@ function LandingPage() {
                     onChange={handleChange}
                   >
                     <option value="">Select budget range</option>
-                    <option value="Under ₹1 Cr">Under ₹1 Cr</option>
-                    <option value="₹1–2 Cr">₹1–2 Cr</option>
-                    <option value="₹2–4 Cr">₹2–4 Cr</option>
-                    <option value="₹4 Cr+">₹4 Cr+</option>
+                    <option value="₹2–3 Cr">₹2–3 Cr</option>
+                    <option value="₹3–4 Cr">₹3–4 Cr</option>
+                    <option value="₹4–6 Cr">₹4–6 Cr</option>
+                    <option value="₹6 Cr+">₹6 Cr+</option>
                   </select>
                 </div>
                 <div className="field">
@@ -788,7 +790,7 @@ function LandingPage() {
                   <span className="stars" aria-label="5 out of 5 stars">
                     ★★★★★
                   </span>{" "}
-                  <span className="reviews-count">25+ reviews</span>
+                  <span className="reviews-count">12+ reviews</span>
                 </div>
               </div>
             </div>
@@ -797,22 +799,22 @@ function LandingPage() {
           <div className="reviews-grid">
             {[
               {
-                name: "Angela Abel",
-                initial: "A",
-                quote:
-                  "Tim was great helping with design. They did an amazing job. Really went above and beyond to make sure everything is done right.",
-              },
-              {
-                name: "Rachel DeLord",
-                initial: "R",
-                quote:
-                  "We loved working with the team. Really helpful, thorough and professional throughout the entire process.",
-              },
-              {
-                name: "Karine B",
+                name: "khushi saraf saraf",
                 initial: "K",
                 quote:
-                  "The service was fantastic. Highly recommended. Everything was clean, smooth and well guided from start to finish.",
+                  "I had a wonderful experience working with Chanderkant Pasari from Infinite Imperial Ventures. He was professional, patient, and truly understood what I was looking for. Found my dream home in no time. Highly recommend!",
+              },
+              {
+                name: "Hajra Mahmood",
+                initial: "H",
+                quote:
+                  "I recently purchased a property from Dalvinder kour and my experience was excellent. The team was professional, knowledgeable, and supportive throughout the process. They made the entire journey smooth and stress-free. The property I purchased exceeded my expectations in every way, from location to quality. I highly recommend to anyone looking for a reliable and trustworthy real estate service!",
+              },
+              {
+                name: "Sudarshan Reddy",
+                initial: "S",
+                quote:
+                  "I had a very good experience with Infinite imperial ventures. Arjun sharma and Dalvi were very supportive and helpful in identifying the perfect property for the requirement i had. It's been a very good and pleasant experience dealing with them. The whole experience was so smooth and memorable. It's a five star experience guys .",
               },
             ].map((r) => (
               <div key={r.name} className="review-card">
@@ -838,25 +840,34 @@ function LandingPage() {
           <h2>Frequently Asked Questions</h2>
           <div className="faq-grid">
             <details className="faq-item">
-              <summary>Can I get a home loan from India?</summary>
+              <summary>Is it legal for Indian residents to invest in Dubai property?</summary>
               <p>
-                Many investors choose to fund via savings, developer payment plans, or loans arranged in
-                India. Eligibility depends on your bank and profile. We can share payment-plan options
-                that reduce upfront burden.
+              Yes. Indian residents can invest in overseas real estate under the RBI’s Liberalised Remittance Scheme (LRS), which allows remittances of up to USD 250,000 per financial year for international investments, including property.
+
               </p>
             </details>
             <details className="faq-item">
-              <summary>Do I need to visit Dubai?</summary>
+              <summary>How do I transfer money from India to Dubai for the purchase?</summary>
               <p>
-                Not always. Property selection, documentation, and booking can often be handled remotely.
-                Visiting is optional and can help with area shortlisting.
+              Funds are transferred through your Indian bank using the LRS foreign outward remittance process. Payments are typically made to the developer’s RERA-regulated escrow account, ensuring investor funds are protected and released only as construction milestones are completed.
               </p>
             </details>
             <details className="faq-item">
-              <summary>How is rental income taxed in India?</summary>
+              <summary>Do I need to travel to Dubai to complete the purchase?</summary>
               <p>
-                Dubai rental income may be taxable in India depending on your residential status and
-                applicable rules. We recommend confirming with your tax advisor for your specific case.
+              Not necessarily. In many cases, property selection, documentation, and payments can be handled remotely. Final registration can also be completed through a Power of Attorney, depending on the transaction.
+              </p>
+            </details>
+            <details className="faq-item">
+              <summary>What rental returns can I realistically expect?</summary>
+              <p>
+              Dubai residential properties typically offer 6–10% annual rental yields, depending on location and property type. Areas such as JVC, Dubai Marina, and Business Bay often see strong rental demand.
+              </p>
+            </details>
+            <details className="faq-item">
+              <summary>How is rental income or profit from sale taxed in India?</summary>
+              <p>
+              Rental income or profits from Dubai property must be declared as foreign income under Indian tax laws. However, India and the UAE have a Double Taxation Avoidance Agreement (DTAA), which helps prevent the same income from being taxed twice.
               </p>
             </details>
           </div>
@@ -951,10 +962,10 @@ function LandingPage() {
                     onChange={handleChange}
                   >
                     <option value="">Select budget range</option>
-                    <option value="Under ₹1 Cr">Under ₹1 Cr</option>
-                    <option value="₹1–2 Cr">₹1–2 Cr</option>
-                    <option value="₹2–4 Cr">₹2–4 Cr</option>
-                    <option value="₹4 Cr+">₹4 Cr+</option>
+                    <option value="₹2–3 Cr">₹2–3 Cr</option>
+                    <option value="₹3–4 Cr">₹3–4 Cr</option>
+                    <option value="₹4–6 Cr">₹4–6 Cr</option>
+                    <option value="₹6 Cr+">₹6 Cr+</option>
                   </select>
                 </div>
                 {error && <p className="error-text">{error}</p>}

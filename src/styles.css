@@ -22,7 +22,7 @@
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter",
+  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter",
     "Segoe UI", sans-serif;
   background: var(--bg);
   color: var(--text);
@@ -127,19 +127,24 @@ h2,
 h3 {
   margin: 0 0 12px;
   letter-spacing: -0.03em;
+  font-family: "Playfair Display", "DM Sans", system-ui, -apple-system, BlinkMacSystemFont,
+    "SF Pro Text", "Inter", "Segoe UI", sans-serif;
 }
 
 h1 {
-  font-size: clamp(2.1rem, 3vw + 1.2rem, 2.9rem);
+  font-size: clamp(2.4rem, 3.4vw + 1.4rem, 3.2rem);
   line-height: 1.1;
+  font-weight: 700;
 }
 
 h2 {
-  font-size: clamp(1.6rem, 2vw + 1rem, 2.1rem);
+  font-size: clamp(1.7rem, 2.4vw + 1rem, 2.3rem);
+  font-weight: 600;
 }
 
 h3 {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
 }
 
 p {
@@ -616,6 +621,19 @@ p {
   justify-content: flex-start;
   gap: 10px;
   min-height: 96px;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .stat-card:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -7px;
+    top: 16px;
+    bottom: 16px;
+    width: 1px;
+    background: linear-gradient(to bottom, rgba(15, 23, 42, 0.18), rgba(15, 23, 42, 0.06));
+  }
 }
 
 .stat-icon {
@@ -643,9 +661,10 @@ p {
 }
 
 .stat-value {
-  color: var(--text);
-  font-weight: 600;
-  font-size: 0.9rem;
+  color: #c08a2b;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.03em;
 }
 
 .stat-label {
@@ -656,19 +675,57 @@ p {
 .feature-card {
   display: grid;
   grid-template-columns: 40px minmax(0, 1fr);
-  gap: 10px;
-  align-items: start;
+  gap: 12px;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
 }
 
 .feature-icon {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: rgba(14, 165, 233, 0.12);
   border: 1px solid rgba(14, 165, 233, 0.22);
+}
+
+.cards-3 .feature-card:nth-child(odd) {
+  background: rgba(244, 246, 251, 0.9);
+}
+
+.cards-3 .feature-card:nth-child(even) {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.cards-3 .feature-card {
+  border-radius: 18px;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+  padding: 12px 14px;
+}
+
+.cards-3 .feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  border-color: rgba(0, 191, 166, 0.22);
+}
+
+.cards-3 .feature-card:nth-child(3n + 1) .feature-icon {
+  background: rgba(0, 191, 166, 0.12);
+  border-color: rgba(0, 191, 166, 0.25);
+}
+
+.cards-3 .feature-card:nth-child(3n + 2) .feature-icon {
+  background: rgba(59, 130, 246, 0.12);
+  border-color: rgba(59, 130, 246, 0.25);
+}
+
+.cards-3 .feature-card:nth-child(3n) .feature-icon {
+  background: rgba(251, 191, 36, 0.12);
+  border-color: rgba(251, 191, 36, 0.25);
 }
 
 .metric-card {
