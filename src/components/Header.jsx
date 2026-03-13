@@ -6,12 +6,9 @@ function Header({ onPrimaryCta, onWhatsApp }) {
       <div className="container header-inner">
         <div className="brand">
           <div className="brand-mark" aria-hidden="true">
-            <img src="/images/logo-iiv.jpeg" alt="Infinite Imperial Ventures logo" />
+            <img src="/images/logo-iiv.png" alt="Infinite Imperial Ventures logo" />
           </div>
-          <div className="brand-text">
-            <div className="brand-name">Infinite Imperial Ventures</div>
-            <div className="brand-sub">We have direct allocation access to projects from Dubai's most trusted developers</div>
-          </div>
+    
         </div>
 
         <nav className="header-actions" aria-label="Primary">

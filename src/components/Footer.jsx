@@ -7,7 +7,7 @@ function Footer() {
         <div className="footer-col">
           <div className="footer-brand">
             <img
-              src="/images/logo-iiv.jpeg"
+              src="/images/logo-iiv.png"
               alt="Infinite Imperial Ventures logo"
               className="footer-logo"
             />

@@ -871,12 +871,7 @@ We guide investors through the entire journey — from property selection and pa
               Dubai residential properties typically offer 6–10% annual rental yields, depending on location and property type. Areas such as JVC, Dubai Marina, and Business Bay often see strong rental demand.
               </p>
             </details>
-            <details className="faq-item">
-              <summary>How is rental income or profit from sale taxed in India?</summary>
-              <p>
-              Rental income or profits from Dubai property must be declared as foreign income under Indian tax laws. However, India and the UAE have a Double Taxation Avoidance Agreement (DTAA), which helps prevent the same income from being taxed twice.
-              </p>
-            </details>
+
           </div>
         </div>
       </section>
@@ -888,11 +883,11 @@ We guide investors through the entire journey — from property selection and pa
           <p>Connect with an advisor who works with international investors in Dubai.</p>
           <p>No obligation. Just honest guidance.</p>
           <div className="cta-buttons">
-            <button className="btn secondary" onClick={openWhatsAppChat}>
+            <button className="btn final-cta-whatsapp" onClick={openWhatsAppChat}>
               WhatsApp Us
             </button>
             <button
-              className="btn primary-outline"
+              className="btn final-cta-callback"
               onClick={() => {
                 const el = document.getElementById("main-form");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
