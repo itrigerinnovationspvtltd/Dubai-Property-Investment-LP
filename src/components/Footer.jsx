@@ -11,7 +11,7 @@ function Footer() {
               alt="Infinite Imperial Ventures logo"
               className="footer-logo"
             />
-            <span>Infinite Imperial Ventures</span>
+          
           </div>
           <p className="footer-text">
             Verified Dubai property opportunities for international investors. RERA-aligned
