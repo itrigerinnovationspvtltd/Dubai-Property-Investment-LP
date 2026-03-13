@@ -5,10 +5,12 @@ function Header({ onPrimaryCta, onWhatsApp }) {
     <header className="site-header">
       <div className="container header-inner">
         <div className="brand">
-          <div className="brand-mark" aria-hidden="true" />
+          <div className="brand-mark" aria-hidden="true">
+            <img src="/images/logo-iiv.jpeg" alt="Infinite Imperial Ventures logo" />
+          </div>
           <div className="brand-text">
             <div className="brand-name">Infinite Imperial Ventures</div>
-            <div className="brand-sub">Dubai Real Estate Brokerage</div>
+            <div className="brand-sub">We have direct allocation access to projects from Dubai's most trusted developers</div>
           </div>
         </div>
 

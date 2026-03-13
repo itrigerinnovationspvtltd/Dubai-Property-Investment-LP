@@ -5,7 +5,14 @@ function Footer() {
     <footer className="site-footer">
       <div className="container footer-inner">
         <div className="footer-col">
-          <div className="footer-brand">Infinite Imperial Ventures</div>
+          <div className="footer-brand">
+            <img
+              src="/images/logo-iiv.jpeg"
+              alt="Infinite Imperial Ventures logo"
+              className="footer-logo"
+            />
+            <span>Infinite Imperial Ventures</span>
+          </div>
           <p className="footer-text">
             Verified Dubai property opportunities for international investors. RERA-aligned
             process, escrow protection, and transparent guidance.

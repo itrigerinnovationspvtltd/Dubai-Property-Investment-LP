@@ -9,6 +9,11 @@ const IMAGE_FEATURE_1 = "/images/project-skyvue-spectra.jpg";
 const IMAGE_FEATURE_2 = "/images/project-avarra-palace.png";
 const IMAGE_FEATURE_3 = "/images/project-lagoon.jpg";
 const IMAGE_ABOUT = "/images/project-c07.jpg";
+const IMAGE_GALLERY_1 = "/images/premium-communities.png";
+const IMAGE_GALLERY_2 = "/images/skyline.png";
+const IMAGE_GALLERY_3 = "/images/lifestyle-amenities.png";
+const IMAGE_PROTECTION = "/images/img_0012.png";
+const IMAGE_FORM = "/images/img_0013.png";
 
 const DEV_LOGOS = [
   { name: "Danube", src: "/images/DANUBE.jpeg" },
@@ -17,6 +22,8 @@ const DEV_LOGOS = [
   { name: "Sobha", src: "/images/SOBHS.jpeg" },
   { name: "Azizi", src: "/images/AZIZI.jpeg" },
   { name: "Object 1", src: "/images/OBJECT1.jpeg" },
+  { name: "Emaar", src: "/images/emaar.png" },
+  { name: "Nakheel", src: "/images/nakheel.png" },
 ];
 
 function Icon({ name }) {
@@ -508,8 +515,8 @@ function LandingPage() {
           <div className="image-collage">
             <div className="image-tile">
               <img
-                src={IMAGE_FEATURE_2}
-                alt="Project exterior rendering"
+                src={IMAGE_GALLERY_1}
+                alt="Premium communities"
                 loading="lazy"
                 decoding="async"
               />
@@ -517,7 +524,7 @@ function LandingPage() {
             </div>
             <div className="image-tile">
               <img
-                src={IMAGE_HERO}
+                src={IMAGE_GALLERY_2}
                 alt="Dubai skyline"
                 loading="lazy"
                 decoding="async"
@@ -526,8 +533,8 @@ function LandingPage() {
             </div>
             <div className="image-tile">
               <img
-                src={IMAGE_FEATURE_3}
-                alt="Lifestyle community rendering"
+                src={IMAGE_GALLERY_3}
+                alt="Lifestyle amenities"
                 loading="lazy"
                 decoding="async"
               />
@@ -576,7 +583,7 @@ function LandingPage() {
 We guide investors through the entire journey — from property selection and payment planning to final registration — making international property investment in Dubai simple and structured.
             </p>
           </div>
-          <div className="media-card">
+          <div className="media-card about-media">
             <img src={IMAGE_ABOUT} alt="Dubai project view" loading="lazy" decoding="async" />
             <div className="media-overlay">
               <div className="media-title">Dubai-based guidance</div>
@@ -637,7 +644,7 @@ We guide investors through the entire journey — from property selection and pa
           </div>
           <div className="media-card protection-card">
             <img
-              src={IMAGE_FEATURE_1}
+              src={IMAGE_PROTECTION}
               alt="Dubai development"
               loading="lazy"
               decoding="async"
@@ -662,7 +669,7 @@ We guide investors through the entire journey — from property selection and pa
               </p>
               <div className="media-card mini-media">
                 <img
-                  src={IMAGE_FEATURE_2}
+                  src={IMAGE_FORM}
                   alt="Verified Dubai developments"
                   loading="lazy"
                   decoding="async"
@@ -875,7 +882,7 @@ We guide investors through the entire journey — from property selection and pa
       </section>
 
       {/* FINAL CTA */}
-      <section className="section subtle-bg">
+      <section className="section final-cta-section">
         <div className="container final-cta">
           <h2>Speak With a Dubai Property Specialist</h2>
           <p>Connect with an advisor who works with international investors in Dubai.</p>
